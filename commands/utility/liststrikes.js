@@ -55,7 +55,7 @@ module.exports = {
 				}
 
 				strikesEmbed
-					.setColor(0xFFFF00)
+					.setColor(0x000000)
 				// ADD LATER: actually @ the person so they know they got striked
 					.setTitle(`A list of ${person.username}'s strikes`)
 					.setDescription(description)

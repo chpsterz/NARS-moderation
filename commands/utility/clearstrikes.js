@@ -44,7 +44,7 @@ module.exports = {
 		});
 
 		const successEmbed = new EmbedBuilder()
-			.setColor(0x0099FF)
+			.setColor(0x42672f)
 		// ADD LATER: actually @ the person so they know they got striked
 			.setTitle(`${person.username}'s strikes have been cleared`)
 			.setDescription(`<@${person.id}>'s strikes have been cleared by <@${interaction.user.id}>`)

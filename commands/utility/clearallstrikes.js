@@ -34,7 +34,7 @@ module.exports = {
 		});
 
 		const successEmbed = new EmbedBuilder()
-			.setColor(0x008000)
+			.setColor(0x61cd2a)
 		// ADD LATER: actually @ the person so they know they got striked
 			.setTitle('All strikes have been cleared')
 			.setDescription('All records of strikes have been cleared')
