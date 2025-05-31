@@ -31,6 +31,7 @@ module.exports = {
 			        user: person,
 			        reason: reason,
 			        time: new Date().toISOString(),
+					strikeId: (json.strikes.length == 0) ? 0 : json.strikes[json.strikes.length - 1].strikeId + 1,
 		        };
 
 				// Push new strike
@@ -55,12 +56,15 @@ module.exports = {
 				else if (count == 4) {
 					message = '5';
 				}
+				else if (count >= 5) {
+					message = 'indefinite';
+				}
 
 				const banEmbed = new EmbedBuilder()
 					.setColor(0xFF0000)
 				// ADD LATER: actually @ the person so they know they got striked
 					.setTitle(`${person.username} has been banned.`)
-					.setDescription(`${person.username} has been banned for ` + message + ' days.')
+					.setDescription(`<@${person.id}> has received a ban for ${message} days.`)
 					.setTimestamp()
 					.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
 
@@ -87,7 +91,7 @@ module.exports = {
 			.setColor(0x0099FF)
 		// ADD LATER: actually @ the person so they know they got striked
 			.setTitle(`${person.username} has received a strike.`)
-			.setDescription('Reason: ' + reason)
+			.setDescription(`<@${person.id}> has received a strike for ${reason}`)
 			.setTimestamp()
 			.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
 
