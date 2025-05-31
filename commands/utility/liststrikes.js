@@ -54,6 +54,10 @@ module.exports = {
 					description += `\n <@${person.id}> is currently banned for ${message} days`;
 				}
 
+				if (description.length == 0) {
+					description = `<@${person.id}> has no strikes`;
+				}
+
 				strikesEmbed
 					.setColor(0x000000)
 				// ADD LATER: actually @ the person so they know they got striked

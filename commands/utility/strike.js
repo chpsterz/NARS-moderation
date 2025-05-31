@@ -61,7 +61,7 @@ module.exports = {
 				}
 
 				const banEmbed = new EmbedBuilder()
-					.setColor(0x833131)
+					.setColor(0x560000)
 				// ADD LATER: actually @ the person so they know they got striked
 					.setTitle(`${person.username} has been banned.`)
 					.setDescription(`<@${person.id}> has received a ban for ${message} days.`)
@@ -88,7 +88,7 @@ module.exports = {
 		});
 
 		const strikeEmbed = new EmbedBuilder()
-			.setColor(0xe71a1a)
+			.setColor(0xff0000)
 		// ADD LATER: actually @ the person so they know they got striked
 			.setTitle(`${person.username} has received a strike.`)
 			.setDescription(`<@${person.id}> has received a strike for ${reason}`)
