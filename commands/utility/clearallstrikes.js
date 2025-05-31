@@ -26,22 +26,22 @@ module.exports = {
 					if (err) {
 						console.error('Error writing file:', err);
 					}
-					else {
-						const successEmbed = new EmbedBuilder()
-							.setColor(0x008000)
-						// ADD LATER: actually @ the person so they know they got striked
-							.setTitle('All strikes have been cleared')
-							.setDescription('All records of strikes have been cleared')
-							.setTimestamp()
-							.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
-						embeds.push(successEmbed);
-						interaction.channel.send({ embeds });
-					}
 				});
 			}
 			catch (e) {
 				console.error('Error parsing JSON:', e);
 			}
 		});
+
+		const successEmbed = new EmbedBuilder()
+			.setColor(0x008000)
+		// ADD LATER: actually @ the person so they know they got striked
+			.setTitle('All strikes have been cleared')
+			.setDescription('All records of strikes have been cleared')
+			.setTimestamp()
+			.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
+		embeds.push(successEmbed);
+
+		await interaction.reply({ embeds });
 	},
 };

@@ -36,22 +36,22 @@ module.exports = {
 					if (err) {
 						console.error('Error writing file:', err);
 					}
-					else {
-						const successEmbed = new EmbedBuilder()
-							.setColor(0x0099FF)
-						// ADD LATER: actually @ the person so they know they got striked
-							.setTitle(`${person.username}'s strikes have been cleared`)
-							.setDescription(`<@${person.id}>'s strikes have been cleared by <@${interaction.user.id}>`)
-							.setTimestamp()
-							.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
-						embeds.push(successEmbed);
-						interaction.channel.send({ embeds });
-					}
 				});
 			}
 			catch (e) {
 				console.error('Error parsing JSON:', e);
 			}
 		});
+
+		const successEmbed = new EmbedBuilder()
+			.setColor(0x0099FF)
+		// ADD LATER: actually @ the person so they know they got striked
+			.setTitle(`${person.username}'s strikes have been cleared`)
+			.setDescription(`<@${person.id}>'s strikes have been cleared by <@${interaction.user.id}>`)
+			.setTimestamp()
+			.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
+		embeds.push(successEmbed);
+
+		await interaction.reply({ embeds });
 	},
 };
