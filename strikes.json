@@ -1,3 +1,79 @@
 {
-  "strikes": []
+  "strikes": [
+    {
+      "user": {
+        "id": "726559229451829290",
+        "bot": false,
+        "system": false,
+        "flags": 128,
+        "username": "chpsterz",
+        "globalName": "chpsterz",
+        "discriminator": "0",
+        "avatar": "a16cb988d0bdf36e3a9ac0d0ca134248",
+        "avatarDecoration": null,
+        "avatarDecorationData": {
+          "asset": "a_8d2ef2fcd26fb58d5edbd5efb7d60bab",
+          "skuId": "1357852406079291593"
+        },
+        "createdTimestamp": 1593295619119,
+        "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/1.png",
+        "tag": "chpsterz",
+        "avatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp",
+        "displayAvatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp"
+      },
+      "reason": "bad",
+      "time": "2025-06-01T13:33:45.718Z",
+      "strikeId": 1
+    },
+    {
+      "user": {
+        "id": "726559229451829290",
+        "bot": false,
+        "system": false,
+        "flags": 128,
+        "username": "chpsterz",
+        "globalName": "chpsterz",
+        "discriminator": "0",
+        "avatar": "a16cb988d0bdf36e3a9ac0d0ca134248",
+        "avatarDecoration": null,
+        "avatarDecorationData": {
+          "asset": "a_8d2ef2fcd26fb58d5edbd5efb7d60bab",
+          "skuId": "1357852406079291593"
+        },
+        "createdTimestamp": 1593295619119,
+        "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/1.png",
+        "tag": "chpsterz",
+        "avatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp",
+        "displayAvatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp"
+      },
+      "reason": "nad",
+      "time": "2025-06-01T13:35:32.860Z",
+      "strikeId": 2
+    },
+    {
+      "user": {
+        "id": "726559229451829290",
+        "bot": false,
+        "system": false,
+        "flags": 128,
+        "username": "chpsterz",
+        "globalName": "chpsterz",
+        "discriminator": "0",
+        "avatar": "a16cb988d0bdf36e3a9ac0d0ca134248",
+        "avatarDecoration": null,
+        "avatarDecorationData": {
+          "asset": "a_8d2ef2fcd26fb58d5edbd5efb7d60bab",
+          "skuId": "1357852406079291593"
+        },
+        "createdTimestamp": 1593295619119,
+        "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/1.png",
+        "tag": "chpsterz",
+        "avatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp",
+        "displayAvatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp"
+      },
+      "reason": "bad",
+      "time": "2025-06-01T13:36:53.133Z",
+      "strikeId": 3
+    }
+  ]
 }
