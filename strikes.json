@@ -2,78 +2,26 @@
   "strikes": [
     {
       "user": {
-        "id": "726559229451829290",
+        "id": "1305552379105509476",
         "bot": false,
         "system": false,
-        "flags": 128,
-        "username": "chpsterz",
-        "globalName": "chpsterz",
+        "flags": 0,
+        "username": "x6_greenland",
+        "globalName": "Greenland",
         "discriminator": "0",
-        "avatar": "a16cb988d0bdf36e3a9ac0d0ca134248",
+        "avatar": "a6a540b80331d62ce8d012b8d35d47fd",
         "avatarDecoration": null,
-        "avatarDecorationData": {
-          "asset": "a_8d2ef2fcd26fb58d5edbd5efb7d60bab",
-          "skuId": "1357852406079291593"
-        },
-        "createdTimestamp": 1593295619119,
+        "avatarDecorationData": null,
+        "createdTimestamp": 1731338343169,
         "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/1.png",
-        "tag": "chpsterz",
-        "avatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp",
-        "displayAvatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp"
+        "tag": "x6_greenland",
+        "avatarURL": "https://cdn.discordapp.com/avatars/1305552379105509476/a6a540b80331d62ce8d012b8d35d47fd.webp",
+        "displayAvatarURL": "https://cdn.discordapp.com/avatars/1305552379105509476/a6a540b80331d62ce8d012b8d35d47fd.webp"
       },
-      "reason": "bad",
-      "time": "2025-06-01T13:33:45.718Z",
-      "strikeId": 1
-    },
-    {
-      "user": {
-        "id": "726559229451829290",
-        "bot": false,
-        "system": false,
-        "flags": 128,
-        "username": "chpsterz",
-        "globalName": "chpsterz",
-        "discriminator": "0",
-        "avatar": "a16cb988d0bdf36e3a9ac0d0ca134248",
-        "avatarDecoration": null,
-        "avatarDecorationData": {
-          "asset": "a_8d2ef2fcd26fb58d5edbd5efb7d60bab",
-          "skuId": "1357852406079291593"
-        },
-        "createdTimestamp": 1593295619119,
-        "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/1.png",
-        "tag": "chpsterz",
-        "avatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp",
-        "displayAvatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp"
-      },
-      "reason": "nad",
-      "time": "2025-06-01T13:35:32.860Z",
+      "reason": "notbeing in vc for the entirety of 5638",
+      "striker": "422129522792595456",
+      "time": "2025-06-01T21:03:02.720Z",
       "strikeId": 2
-    },
-    {
-      "user": {
-        "id": "726559229451829290",
-        "bot": false,
-        "system": false,
-        "flags": 128,
-        "username": "chpsterz",
-        "globalName": "chpsterz",
-        "discriminator": "0",
-        "avatar": "a16cb988d0bdf36e3a9ac0d0ca134248",
-        "avatarDecoration": null,
-        "avatarDecorationData": {
-          "asset": "a_8d2ef2fcd26fb58d5edbd5efb7d60bab",
-          "skuId": "1357852406079291593"
-        },
-        "createdTimestamp": 1593295619119,
-        "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/1.png",
-        "tag": "chpsterz",
-        "avatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp",
-        "displayAvatarURL": "https://cdn.discordapp.com/avatars/726559229451829290/a16cb988d0bdf36e3a9ac0d0ca134248.webp"
-      },
-      "reason": "bad",
-      "time": "2025-06-01T13:36:53.133Z",
-      "strikeId": 3
     }
   ]
 }

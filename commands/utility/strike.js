@@ -11,10 +11,14 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('reason')
 				.setDescription('specify the reason for striking a user').setRequired(true))
+		.addStringOption(option =>
+			option.setName('queue')
+				.setDescription('link the match result message').setRequired(true))
 		.setContexts(InteractionContextType.Guild),
 	async execute(interaction) {
 		const person = interaction.options.getUser('user');
 		const member = await interaction.guild.members.fetch(interaction.user.id);
+		const queue = interaction.options.getString('queue') ?? '';
 
 		if (await member.roles.cache.has('1324984176461746186')) {
 			const reason = interaction.options.getString('reason') ?? 'No reason provided';
@@ -33,7 +37,8 @@ module.exports = {
 					const newStrike = {
 			        user: person,
 			        reason: reason,
-			        time: new Date().toISOString(),
+						striker: interaction.user.id,
+			        time: new Date(),
 						strikeId: (json.strikes.length == 0) ? 0 : json.strikes[json.strikes.length - 1].strikeId + 1,
 		        };
 
@@ -49,18 +54,32 @@ module.exports = {
 					}
 
 		        let message = '';
+					const roleId = '1375283461035921469';
 
 					if (count == 2) {
 						message = '1';
+						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						setTimeout(() => {
+							member.roles.remove(interaction.guild.roles.cache.get(roleId));
+						}, 86400);
 					}
 					else if (count == 3) {
 						message = '3';
+						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						setTimeout(() => {
+							member.roles.remove(interaction.guild.roles.cache.get(roleId));
+						}, 259200);
 					}
 					else if (count == 4) {
 						message = '5';
+						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						setTimeout(() => {
+							member.roles.remove(interaction.guild.roles.cache.get(roleId));
+						}, 432000);
 					}
 					else if (count >= 5) {
 						message = 'indefinite';
+						member.roles.add(interaction.guild.roles.cache.get(roleId));
 					}
 
 					const banEmbed = new EmbedBuilder()
@@ -94,7 +113,7 @@ module.exports = {
 				.setColor(0xff0000)
 			// ADD LATER: actually @ the person so they know they got striked
 				.setTitle(`${person.username} has received a strike.`)
-				.setDescription(`<@${person.id}> has received a strike for ${reason}`)
+				.setDescription(`<@${person.id}> has received a strike for ` + '`' + reason + '`' + `in the following queue ${queue}`)
 				.setTimestamp()
 				.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
 

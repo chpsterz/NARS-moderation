@@ -29,7 +29,7 @@ module.exports = {
 
 				for (let i = 0; i < json.strikes.length; i++) {
 					if (json.strikes[i].user.id == person.id) {
-						description += `\n <@${interaction.user.id}> striked <@${person.id}> for ${json.strikes[i].reason} \n`;
+						description += `\n <@${json.strikes[i].striker}> striked <@${person.id}> for ${json.strikes[i].reason} \n`;
 						count++;
 					}
 				}
