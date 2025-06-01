@@ -11,6 +11,7 @@ module.exports = {
 		.setContexts(InteractionContextType.Guild),
 	async execute(interaction) {
 		const person = interaction.options.getUser('user');
+		const personRole = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
 
 		const member = await interaction.guild.members.fetch(interaction.user.id);
 
@@ -45,6 +46,9 @@ module.exports = {
 					console.error('Error parsing JSON:', e);
 				}
 			});
+
+			const roleId = '1375283461035921469';
+			personRole.roles.remove(interaction.guild.roles.cache.get(roleId));
 
 			const successEmbed = new EmbedBuilder()
 				.setColor(0x42672f)
