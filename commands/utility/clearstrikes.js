@@ -48,9 +48,8 @@ module.exports = {
 			});
 
 			const roleId = '1375283461035921469';
-			if (personRole.roles.cache.has(role.id)) {
-				personRole.roles.remove(interaction.guild.roles.cache.get(roleId));
-			}
+			personRole.roles.remove(interaction.guild.roles.cache.get(roleId));
+
 
 			const successEmbed = new EmbedBuilder()
 				.setColor(0x42672f)
