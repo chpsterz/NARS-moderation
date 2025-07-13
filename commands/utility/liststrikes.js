@@ -29,7 +29,10 @@ module.exports = {
 
 				for (let i = 0; i < json.strikes.length; i++) {
 					if (json.strikes[i].user.id == person.id) {
-						description += `\n <@${json.strikes[i].striker}> striked <@${person.id}> for ${json.strikes[i].reason} \n`;
+						const isoTime = json.strikes[i].time;
+						const timestamp = Math.floor(new Date(isoTime).getTime() / 1000);
+
+						description += `\n <@${json.strikes[i].striker}> striked <@${person.id}> for ${json.strikes[i].reason} in ${json.strikes[i].q}\n The time of the strike was <t:${timestamp}>`;
 						count++;
 					}
 				}
@@ -39,23 +42,23 @@ module.exports = {
 
 				if (count == 2) {
 					message = '1';
-					description += `\n <@${person.id}> is currently banned for ${message} days`;
+					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
 				}
 				else if (count == 3) {
 					message = '3';
-					description += `\n <@${person.id}> is currently banned for ${message} days`;
+					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
 				}
 				else if (count == 4) {
 					message = '5';
-					description += `\n <@${person.id}> is currently banned for ${message} days`;
+					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
 				}
 				else if (count >= 5) {
 					message = 'indefinite';
-					description += `\n <@${person.id}> is currently banned for ${message} days`;
+					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
 				}
 
 				if (description.length == 0) {
-					description = `<@${person.id}> has no strikes`;
+					description = `\n <@${person.id}> has no strikes`;
 				}
 
 				strikesEmbed

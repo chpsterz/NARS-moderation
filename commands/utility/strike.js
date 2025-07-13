@@ -17,6 +17,7 @@ module.exports = {
 		.setContexts(InteractionContextType.Guild),
 	async execute(interaction) {
 		const person = interaction.options.getUser('user');
+		const personBeingStriked = await interaction.guild.members.fetch(person.id).catch(() => null);
 		const member = await interaction.guild.members.fetch(interaction.user.id);
 		const queue = interaction.options.getString('queue') ?? '';
 
@@ -40,6 +41,7 @@ module.exports = {
 						striker: interaction.user.id,
 			        time: new Date(),
 						strikeId: (json.strikes.length == 0) ? 0 : json.strikes[json.strikes.length - 1].strikeId + 1,
+						q: `${queue}`,
 		        };
 
 					// Push new strike
@@ -58,28 +60,28 @@ module.exports = {
 
 					if (count == 2) {
 						message = '1';
-						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
 						setTimeout(() => {
-							member.roles.remove(interaction.guild.roles.cache.get(roleId));
+							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roleId));
 						}, 86400);
 					}
 					else if (count == 3) {
 						message = '3';
-						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
 						setTimeout(() => {
-							member.roles.remove(interaction.guild.roles.cache.get(roleId));
+							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roleId));
 						}, 259200);
 					}
 					else if (count == 4) {
 						message = '5';
-						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
 						setTimeout(() => {
-							member.roles.remove(interaction.guild.roles.cache.get(roleId));
+							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roleId));
 						}, 432000);
 					}
 					else if (count >= 5) {
 						message = 'indefinite';
-						member.roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
 					}
 
 					const banEmbed = new EmbedBuilder()
