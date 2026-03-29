@@ -1,5 +1,7 @@
 const { InteractionContextType, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
+const { roles } = require('../../config.json');
+
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -21,13 +23,13 @@ module.exports = {
 		const member = await interaction.guild.members.fetch(interaction.user.id);
 		const queue = interaction.options.getString('queue') ?? '';
 
-		if (await member.roles.cache.has('1324984176461746186')) {
+		if (await member.roles.cache.has(roles.queueMod)) {
 			const reason = interaction.options.getString('reason') ?? 'No reason provided';
 
 			const embeds = [];
 
 			// Read the current file
-			fs.readFile('strikes.json', 'utf8', (err, data) => {
+			fs.readFile('./strikes.json', 'utf8', (err, data) => {
 				if (err) {
 					console.error('Error reading file:', err);
 					return;
@@ -36,7 +38,7 @@ module.exports = {
 				try {
 					const json = JSON.parse(data);
 					const newStrike = {
-			        user: person,
+			        user: person.id,
 			        reason: reason,
 						striker: interaction.user.id,
 			        time: new Date(),
@@ -56,32 +58,31 @@ module.exports = {
 					}
 
 		        let message = '';
-					const roleId = '1375283461035921469';
 
 					if (count == 2) {
 						message = '1';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
 						setTimeout(() => {
-							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roleId));
+							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
 						}, 86400);
 					}
 					else if (count == 3) {
 						message = '3';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
 						setTimeout(() => {
-							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roleId));
+							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
 						}, 259200);
 					}
 					else if (count == 4) {
 						message = '5';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
 						setTimeout(() => {
-							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roleId));
+							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
 						}, 432000);
 					}
 					else if (count >= 5) {
 						message = 'indefinite';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roleId));
+						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
 					}
 
 					const banEmbed = new EmbedBuilder()

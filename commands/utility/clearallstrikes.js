@@ -1,5 +1,6 @@
 const { InteractionContextType, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
+const { roles } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,7 +13,7 @@ module.exports = {
 
 		const member = await interaction.guild.members.fetch(interaction.user.id);
 
-		if (await member.roles.cache.has('1373344496548450334')) {
+		if (await member.roles.cache.has(roles.moderator)) {
 		// Read the current file
 			fs.readFile('strikes.json', 'utf8', (err, data) => {
 				if (err) {

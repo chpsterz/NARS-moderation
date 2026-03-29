@@ -1,5 +1,6 @@
 const { InteractionContextType, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
+const { roles } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,7 +16,7 @@ module.exports = {
 
 		const member = await interaction.guild.members.fetch(interaction.user.id);
 
-		if (await member.roles.cache.has('1324984176461746186')) {
+		if (await member.roles.cache.has(roles.headQueueMod)) {
 			const embeds = [];
 
 			// Read the current file
@@ -29,7 +30,7 @@ module.exports = {
 					const json = JSON.parse(data);
 
 					for (let i = 0; i < json.strikes.length; i++) {
-						if (json.strikes[i].user.id == person.id) {
+						if (json.strikes[i].user == person.id) {
 							json.strikes.splice(i, 1);
 							i = i - 1;
 						}
@@ -47,8 +48,7 @@ module.exports = {
 				}
 			});
 
-			const roleId = '1375283461035921469';
-			personRole.roles.remove(interaction.guild.roles.cache.get(roleId));
+			personRole.roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
 
 
 			const successEmbed = new EmbedBuilder()

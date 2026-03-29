@@ -28,7 +28,7 @@ module.exports = {
 				let count = 0;
 
 				for (let i = 0; i < json.strikes.length; i++) {
-					if (json.strikes[i].user.id == person.id) {
+					if (json.strikes[i].user == person.id) {
 						const isoTime = json.strikes[i].time;
 						const timestamp = Math.floor(new Date(isoTime).getTime() / 1000);
 
