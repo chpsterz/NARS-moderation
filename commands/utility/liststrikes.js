@@ -1,5 +1,6 @@
 const { InteractionContextType, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
+const { punishments } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -32,7 +33,7 @@ module.exports = {
 						const isoTime = json.strikes[i].time;
 						const timestamp = Math.floor(new Date(isoTime).getTime() / 1000);
 
-						description += `\n <@${json.strikes[i].striker}> striked <@${person.id}> for ${json.strikes[i].reason} in ${json.strikes[i].q}\n The time of the strike was <t:${timestamp}>`;
+						description += `\n <@${json.strikes[i].striker}> striked <@${person.id}> for ${punishments[json.strikes[i].selected].punishmentName} in ${json.strikes[i].q}\n The time of the strike was <t:${timestamp}> \n Queue Moderator statement: ${json.strikes[i].reason} \n \n`;
 						count++;
 					}
 				}

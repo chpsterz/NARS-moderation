@@ -1,8 +1,6 @@
 const { InteractionContextType, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
-const { roles } = require('../../config.json');
-
-
+const { roles, punishments } = require('../../config.json');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('strike')
@@ -11,11 +9,24 @@ module.exports = {
 			option.setName('user')
 				.setDescription('strikes a user').setRequired(true))
 		.addStringOption(option =>
-			option.setName('reason')
-				.setDescription('specify the reason for striking a user').setRequired(true))
-		.addStringOption(option =>
 			option.setName('queue')
 				.setDescription('link the match result message').setRequired(true))
+		.addStringOption(option =>
+			option.setName('type')
+				.setDescription('type of strike')
+				.setRequired(true)
+				.addChoices(
+					{ name: 'Throwing/Sabotaging/Griefing', value: '0' },
+					{ name: 'ghostplaying/alting', value: '1' },
+					{ name: 'not joining team vc/deafening', value: '2' },
+					{ name: 'yelling/spoken toxicity/flooding comms', value: '3' },
+					{ name: 'leaving before team select', value: '4' },
+					{ name: 'leaving after team select', value: '5' },
+				),
+		)
+		.addStringOption(option =>
+			option.setName('description')
+				.setDescription('please provide a couple of sentences of detail on some background on why the strike is deserved.').setRequired(true))
 		.setContexts(InteractionContextType.Guild),
 	async execute(interaction) {
 		const person = interaction.options.getUser('user');
@@ -24,7 +35,8 @@ module.exports = {
 		const queue = interaction.options.getString('queue') ?? '';
 
 		if (await member.roles.cache.has(roles.queueMod)) {
-			const reason = interaction.options.getString('reason') ?? 'No reason provided';
+			const reason = interaction.options.getString('description') ?? 'No reason provided';
+			console.log(interaction.options.getString('type'));
 
 			const embeds = [];
 
@@ -40,6 +52,7 @@ module.exports = {
 					const newStrike = {
 			        user: person.id,
 			        reason: reason,
+						selected: interaction.options.getString('type'),
 						striker: interaction.user.id,
 			        time: new Date(),
 						strikeId: (json.strikes.length == 0) ? 0 : json.strikes[json.strikes.length - 1].strikeId + 1,
@@ -116,7 +129,7 @@ module.exports = {
 				.setColor(0xff0000)
 			// ADD LATER: actually @ the person so they know they got striked
 				.setTitle(`${person.username} has received a strike.`)
-				.setDescription(`<@${person.id}> has received a strike for ` + '`' + reason + '`' + `in the following queue ${queue}`)
+				.setDescription(`<@${person.id}> has received a strike for ` + '`' + punishments[interaction.options.getString('type')].punishmentName + '`' + `in the following queue ${queue} \n Queue Moderator statement: ${reason}`)
 				.setTimestamp()
 				.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
 
