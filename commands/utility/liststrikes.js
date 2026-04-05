@@ -26,7 +26,6 @@ module.exports = {
 				const json = JSON.parse(data);
 
 				let description = '';
-				let count = 0;
 
 				for (let i = 0; i < json.strikes.length; i++) {
 					if (json.strikes[i].user == person.id) {
@@ -34,29 +33,9 @@ module.exports = {
 						const timestamp = Math.floor(new Date(isoTime).getTime() / 1000);
 
 						description += `\n <@${json.strikes[i].striker}> striked <@${person.id}> for ${punishments[json.strikes[i].selected].punishmentName} in ${json.strikes[i].q}\n The time of the strike was <t:${timestamp}> \n Queue Moderator statement: ${json.strikes[i].reason} \n \n`;
-						count++;
 					}
 				}
 
-
-		        let message = '';
-
-				if (count == 2) {
-					message = '1';
-					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
-				}
-				else if (count == 3) {
-					message = '3';
-					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
-				}
-				else if (count == 4) {
-					message = '5';
-					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
-				}
-				else if (count >= 5) {
-					message = 'indefinite';
-					description += `\n \n <@${person.id}> is currently banned for ${message} days`;
-				}
 
 				if (description.length == 0) {
 					description = `\n <@${person.id}> has no strikes`;

@@ -1,6 +1,7 @@
 const { InteractionContextType, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const { roles, punishments } = require('../../config.json');
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('strike')
@@ -33,11 +34,10 @@ module.exports = {
 		const personBeingStriked = await interaction.guild.members.fetch(person.id).catch(() => null);
 		const member = await interaction.guild.members.fetch(interaction.user.id);
 		const queue = interaction.options.getString('queue') ?? '';
+		const reason = interaction.options.getString('description') ?? 'No reason provided';
 
 		if (await member.roles.cache.has(roles.queueMod)) {
-			const reason = interaction.options.getString('description') ?? 'No reason provided';
-			console.log(interaction.options.getString('type'));
-
+			const length = punishments[interaction.options.getString('type')].punishmentLength;
 			const embeds = [];
 
 			// Read the current file
@@ -50,64 +50,24 @@ module.exports = {
 				try {
 					const json = JSON.parse(data);
 					const newStrike = {
-			        user: person.id,
-			        reason: reason,
-						selected: interaction.options.getString('type'),
-						striker: interaction.user.id,
-			        time: new Date(),
-						strikeId: (json.strikes.length == 0) ? 0 : json.strikes[json.strikes.length - 1].strikeId + 1,
-						q: `${queue}`,
+			             user: person.id,
+			             reason: reason,
+					     selected: interaction.options.getString('type'),
+					     striker: interaction.user.id,
+			             time: new Date(),
+					     strikeId: (json.strikes.length == 0) ? 0 : json.strikes[json.strikes.length - 1].strikeId + 1,
+					     q: `${queue}`,
+						 duration: length,
 		        };
 
 					// Push new strike
 					json.strikes.push(newStrike);
 
-					let count = 0;
-
-					for (let i = 0; i < json.strikes.length; i++) {
-						if (json.strikes[i].user.id == person.id) {
-							count++;
-						}
-					}
-
-		        let message = '';
-
-					if (count == 2) {
-						message = '1';
+					if (length != 0) {
 						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
 						setTimeout(() => {
-							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
-						}, 86400);
-					}
-					else if (count == 3) {
-						message = '3';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
-						setTimeout(() => {
-							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
-						}, 259200);
-					}
-					else if (count == 4) {
-						message = '5';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
-						setTimeout(() => {
-							personBeingStriked .roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
-						}, 432000);
-					}
-					else if (count >= 5) {
-						message = 'indefinite';
-						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
-					}
-
-					const banEmbed = new EmbedBuilder()
-						.setColor(0x560000)
-					// ADD LATER: actually @ the person so they know they got striked
-						.setTitle(`${person.username} has been banned.`)
-						.setDescription(`<@${person.id}> has received a ban for ${message} days.`)
-						.setTimestamp()
-						.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
-
-					if (count > 1) {
-						interaction.channel.send({ embeds: [banEmbed] });
+							personBeingStriked.roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
+						}, length);
 					}
 
 					// Write updated data back to file
@@ -129,7 +89,7 @@ module.exports = {
 				.setColor(0xff0000)
 			// ADD LATER: actually @ the person so they know they got striked
 				.setTitle(`${person.username} has received a strike.`)
-				.setDescription(`<@${person.id}> has received a strike for ` + '`' + punishments[interaction.options.getString('type')].punishmentName + '`' + `in the following queue ${queue} \n Queue Moderator statement: ${reason}`)
+				.setDescription(`<@${person.id}> has received a strike for ` + '`' + punishments[interaction.options.getString('type')].punishmentName + '`' + ` in the following queue #${queue} \n Queue Ban Duration: <t:${Math.floor(Date.now() / 1000) + Number(length)}:F> \n Comments: ${reason}`)
 				.setTimestamp()
 				.setFooter({ text: 'NARS Moderation', iconURL: 'https://cdn.discordapp.com/icons/1282262872675844106/fd63e5c9b231c482ec3a9bce40135a01.png?size=4096' });
 
