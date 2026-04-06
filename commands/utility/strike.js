@@ -67,7 +67,7 @@ module.exports = {
 						personBeingStriked .roles.add(interaction.guild.roles.cache.get(roles.queueBanned));
 						setTimeout(() => {
 							personBeingStriked.roles.remove(interaction.guild.roles.cache.get(roles.queueBanned));
-						}, length);
+						}, length * 1000);
 					}
 
 					// Write updated data back to file
